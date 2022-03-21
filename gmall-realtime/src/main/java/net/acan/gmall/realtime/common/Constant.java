@@ -14,4 +14,6 @@ public class Constant {
     public static final String PHONEIX_URL = "jdbc:phoenix:hadoop162,hadoop163,hadoop164:2181";
     public static final String TOPIC_DWM_UV = "dwm_uv";
     public static final String DWM_UJ = "dwm_uj";
+    public static final String TOPIC_DWD_ORDER_INFO = "dwd_order_info";
+    public static final String TOPIC_DWD_ORDER_DETAIL = "dwd_order_detail";
 }
