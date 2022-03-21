@@ -35,7 +35,7 @@ public abstract class BaseAppV1 {
 
 
         try {
-            env.execute();
+            env.execute(groupId);
         } catch (Exception e) {
             e.printStackTrace();
         }
