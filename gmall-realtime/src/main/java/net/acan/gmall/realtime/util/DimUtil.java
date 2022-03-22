@@ -10,7 +10,7 @@ import java.util.List;
 
 public class DimUtil {
 
-    private static JSONObject dim;
+
 
     public static JSONObject readDimFromPhoenix(Connection phoenixConn,
                                                 String table,
@@ -32,7 +32,7 @@ public class DimUtil {
                                      String tableName,
                                      Long id) throws Exception {
     //1.先从redis中读
-        dim = readDimFromRedis(redisClient,tableName,id);
+        JSONObject dim = readDimFromRedis(redisClient,tableName,id);
 //2.如果Redis中没读到，再从phoenix中读取
         if (dim == null) {//从缓存没读到维度数据
             dim = readDimFromPhoenix(phoenixConn,tableName,id);

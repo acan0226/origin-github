@@ -1,12 +1,12 @@
 package net.acan.gmall.realtime.bean;
 
+import com.ibm.icu.text.SimpleDateFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 @Data
 @AllArgsConstructor
@@ -88,8 +88,18 @@ public class OrderWide {
         }
     }
 
-    public void calculateAge(String birthday) throws ParseException {
+    // 根据生日计算年龄
+    public void calcuUserAge(String birthday) throws ParseException {
         long bir = new SimpleDateFormat("yyyy-MM-dd").parse(birthday).getTime();
-        this.user_age =(int) ((System.currentTimeMillis() - bir)/1000/60/60/24/365 )   ;
+        this.user_age = (int) ((System.currentTimeMillis() - bir) / 1000 / 60 / 60 / 24 / 365);
+    }
+
+    public Long getTs(){
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(create_time).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

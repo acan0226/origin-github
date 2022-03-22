@@ -85,7 +85,7 @@ public class DwmOrderWideApp extends BaseAppV2 {
                         //参数1：连接 参数二：表名 参数三：查询的ID
                         JSONObject userInfo = DimUtil.readDimFromPhoenix(phoenixConn,"dim_user_info",orderWide.getUser_id());
                         orderWide.setUser_gender(userInfo.getString("GENDER"));
-                        orderWide.calculateAge(userInfo.getString("BIRTHDAY"));
+                        orderWide.calcuUserAge(userInfo.getString("BIRTHDAY"));
                         //补齐省份
                         JSONObject baseProvince = DimUtil.readDimFromPhoenix(phoenixConn, "dim_base_province", orderWide.getProvince_id());
                         orderWide.setProvince_name(baseProvince.getString("NAME"));

@@ -151,6 +151,8 @@
                     <artifactId>javax.el</artifactId>
                 </exclusion>
             </exclusions>
+            <!--当实用异步的时候, phoenix会有问题. 不要打包phoenix-->
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

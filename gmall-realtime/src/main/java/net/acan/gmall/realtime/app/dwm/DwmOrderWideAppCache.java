@@ -46,8 +46,12 @@ public class DwmOrderWideAppCache extends BaseAppV2 {
         //事实表join,得到一个新的流（事实表）
         SingleOutputStreamOperator<OrderWide> orderWidewithoutDimStream = factsJoin(topicStreamMap);
         //orderWidewithoutDimStream.print();
-        //事实表和维度表join
+        //2.事实表和维度表join
         factsJoinDim(orderWidewithoutDimStream);
+        //2.1旁路缓存并优化
+        //2.2异步同步
+
+        //3.将数据写入kafka
     }
 
     private void factsJoinDim(SingleOutputStreamOperator<OrderWide> orderWidewithoutDimStream) {
@@ -92,7 +96,7 @@ public class DwmOrderWideAppCache extends BaseAppV2 {
                         //参数1：连接 参数二：表名 参数三：查询的ID
                         JSONObject userInfo = DimUtil.readDim(redisClient,phoenixConn,"dim_user_info",orderWide.getUser_id());
                         orderWide.setUser_gender(userInfo.getString("GENDER"));
-                        orderWide.calculateAge(userInfo.getString("BIRTHDAY"));
+                        orderWide.calcuUserAge(userInfo.getString("BIRTHDAY"));
                         //补齐省份
                         JSONObject baseProvince = DimUtil.readDim(redisClient,phoenixConn, "dim_base_province", orderWide.getProvince_id());
                         orderWide.setProvince_name(baseProvince.getString("NAME"));
