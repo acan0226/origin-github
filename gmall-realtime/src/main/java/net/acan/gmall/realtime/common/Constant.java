@@ -19,4 +19,8 @@ public class Constant {
     public static final String TOPIC_DWD_ORDER_DETAIL = "dwd_order_detail";
     public static final String TOPIC_DWM_ORDER_WIDE = "dwm_order_wide";
     public static final String TOPIC_DWM_PAYMENT_WIDE = "dwm_payment_wide";
+    public static final String CLICKHOUSE_DRIVER = "ru.yandex.clickhouse.ClickHouseDriver";
+    public static final String CLICKHOUSE_PRE_URL = "jdbc:clickhouse://hadoop162:8123/";
+    public static final String CLICKHOUSE_DB = "gmall_realtime_2022";
+    public static final String CLICKHOUSE_TABLE_VISITOR_STATS_2021 = "visitor_stats_2022";
 }

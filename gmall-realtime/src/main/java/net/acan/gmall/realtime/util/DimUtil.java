@@ -10,7 +10,8 @@ import java.util.List;
 
 public class DimUtil {
 
-
+// 工具类 要么放常量 要么是静态方法
+    //不要放成员变量
 
     public static JSONObject readDimFromPhoenix(Connection phoenixConn,
                                                 String table,

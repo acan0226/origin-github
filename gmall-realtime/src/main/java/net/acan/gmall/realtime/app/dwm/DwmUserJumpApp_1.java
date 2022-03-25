@@ -37,8 +37,8 @@ public class DwmUserJumpApp_1 extends BaseAppV1 {
     public static void main(String[] args) {
         new DwmUserJumpApp_1().init(3002,
                 1,
-                "DwmUvApp",
-                "DwmUvApp",
+                "DwmUserJumpApp_1",
+                "DwmUserJumpApp_1",
                 Constant.TOPIC_DWD_PAGE);
     }
 

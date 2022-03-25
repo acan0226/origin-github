@@ -20,7 +20,7 @@ public abstract class BaseAppV2 {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(conf);
         env.setParallelism(p);
         //开启checkpoint
-        env.enableCheckpointing(3000);
+        env.enableCheckpointing(3000);//每3秒开启一次checkpoint
         //设置状态后端
         env.setStateBackend(new HashMapStateBackend());
         env.getCheckpointConfig().setCheckpointStorage("hdfs://hadoop162:8020/ck/gmall/"+ck);
