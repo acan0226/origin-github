@@ -1,6 +1,7 @@
 package net.acan.gmall.realtime.util;
 
 import com.alibaba.fastjson.JSONObject;
+import net.acan.gmall.realtime.annotation.NotSink;
 import net.acan.gmall.realtime.bean.TableProcess;
 import net.acan.gmall.realtime.bean.VisitorStats;
 import net.acan.gmall.realtime.common.Constant;
@@ -109,16 +110,21 @@ public class FlinkSinkUtil {
                                        T t) throws SQLException {
                         // 获取class方式:  1. Class.forName(..)  2. 类名.class  3. 对象.getClass
                         // 利用对象 t中的属性的值, 给sql中的占位符进行赋值
+                        //TODO
+                        // insert into abc(stt,edt,vc,ch,ar,is_new,uv_ct,pv_ct,sv_ct,uj_ct,dur_sum,ts)values(?,?,?,?,?,?,?,?,?,?,?,?)
                         Class<?> tClass = t.getClass();
                         try {
                         Field[] fields = tClass.getDeclaredFields();
-                        for (int i = 0; i < fields.length; i++) {
+                        for (int i = 0,p=1; i < fields.length; i++) {
                             Field field = fields[i];
-                            field.setAccessible(true);
+                            NotSink noSink = field.getAnnotation(NotSink.class);
+                            if (noSink == null) {
+                                field.setAccessible(true);
+                                Object v = field.get(t); // 获取属性的值
+                                ps.setObject(p++, v);  // 给占位符赋值
+                            }
 
-                            Object  v = field.get(t);
 
-                            ps.setObject(i+1,v);
 
                         } } catch (IllegalAccessException e) {
                             e.printStackTrace();

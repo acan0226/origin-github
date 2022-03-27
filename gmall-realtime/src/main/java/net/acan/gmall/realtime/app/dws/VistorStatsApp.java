@@ -56,7 +56,7 @@ public class VistorStatsApp extends BaseAppV2 {
          */
         vsAggStream
                 .addSink(FlinkSinkUtil.getClickHouseSink(Constant.CLICKHOUSE_DB,
-                                Constant.CLICKHOUSE_TABLE_VISITOR_STATS_2021,
+                                Constant.CLICKHOUSE_TABLE_VISITOR_STATS_2022,
                                 VisitorStats.class)
                         );
     }
