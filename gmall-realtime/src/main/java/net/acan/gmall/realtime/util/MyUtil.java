@@ -4,10 +4,16 @@ import com.alibaba.fastjson.JSONObject;
 import com.ibm.icu.text.SimpleDateFormat;
 import net.acan.gmall.realtime.annotation.NotSink;
 import net.acan.gmall.realtime.bean.ProductStats;
+import org.wltea.analyzer.core.IKSegmenter;
+import org.wltea.analyzer.core.Lexeme;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 public class MyUtil {
@@ -38,9 +44,7 @@ public class MyUtil {
         return s.toString();
     }
 
-    public static void main(String[] args) {
-        System.out.println(getFieldString(ProductStats.class));
-    }
+
 
     public static <T> String[] getFields(Class<T> tClass) {
         Field[] fields = tClass.getDeclaredFields();
@@ -73,4 +77,25 @@ public class MyUtil {
         }
         return new com.ibm.icu.text.SimpleDateFormat(f).parse(dateTime).getTime();
     }
+
+    //利用ik分词器对 kw进行分词
+    public static List<String> split(String kw) throws IOException {
+
+        //字符串 -> ...  -> Reader,字符串转换成字符流
+        // 内存流  StringReader
+        IKSegmenter seg = new IKSegmenter(new StringReader(kw), true);
+
+        HashSet<String> words = new HashSet<>();
+        Lexeme next = seg.next();
+
+        while (next != null){
+            String word = next.getLexemeText();
+            words.add(word);
+            next = seg.next();
+        }
+        return new ArrayList<String>(words) {
+        };
+    }
+
+
 }

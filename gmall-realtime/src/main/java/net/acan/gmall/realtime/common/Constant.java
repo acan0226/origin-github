@@ -35,6 +35,8 @@ public class Constant {
     public static final String CLICKHOUSE_TABLE_VISITOR_STATS_2022 = "visitor_stats_2022";
     public static final String CLICKHOUSE_TABLE_PRODUCT_STATS_2022 = "product_stats_2022";
     public static final String CLICKHOUSE_TABLE_PROVINCE_STATS_2022 = "province_stats_2022";
+    public static final String CLICKHOUSE_TABLE_KEYWORD_STATS_2022 = "keyword_stats_2022";
     public static final String FIVE_STAR_GOOD_COMMENT = "1205";
     public static final String FOUR_STAR_GOOD_COMMENT = "1204";
+    public static final String TOPIC_DWS_PRODUCT_STATS = "dws_product_stats";
 }

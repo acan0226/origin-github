@@ -7,6 +7,7 @@ import net.acan.gmall.realtime.app.BaseAppV2;
 import net.acan.gmall.realtime.bean.OrderWide;
 import net.acan.gmall.realtime.bean.PaymentWide;
 import net.acan.gmall.realtime.bean.ProductStats;
+import net.acan.gmall.realtime.common.Constant;
 import net.acan.gmall.realtime.util.DimUtil;
 import net.acan.gmall.realtime.util.FlinkSinkUtil;
 import net.acan.gmall.realtime.util.MyUtil;
@@ -61,6 +62,17 @@ public class ProductStatsApp extends BaseAppV2 {
         // 4. 写入到Clickhouse中
         writeToClickHouse(psSreamWithDim);
 
+        // 5. 把产品主题宽表的数据写入到Kafka中, 给ProductKeyWordStatsApp主题使用
+        writeToKafka(psSreamWithDim);
+
+
+
+    }
+
+    private void writeToKafka(SingleOutputStreamOperator<ProductStats> stream) {
+        stream
+                .map(ps -> JSON.toJSONString(ps))
+                .addSink(FlinkSinkUtil.getKafkaSink(TOPIC_DWS_PRODUCT_STATS));
 
     }
 
