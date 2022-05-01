@@ -42,7 +42,7 @@ public class DwdDbApp extends BaseAppV1 {
                        DataStreamSource<String> stream) {
        // stream.print();
 
-        // 1. 对业务数据做etc
+        // 1. 对业务数据做etl
         SingleOutputStreamOperator<JSONObject> etlStream = etl(stream);
         // 2. 读取配置表的数据
        SingleOutputStreamOperator<TableProcess> tpStream =
@@ -220,7 +220,7 @@ public class DwdDbApp extends BaseAppV1 {
         //Table tp = tableEnv.sqlQuery("select * from table_process");
 
         Table tp = tableEnv.from("table_process");
-        //吧这张表转为一个流
+        //把这张表转为一个流
         return tableEnv.toRetractStream(tp, TableProcess.class)
                 .filter(s -> s.f0)
                 .map(t -> t.f1);
